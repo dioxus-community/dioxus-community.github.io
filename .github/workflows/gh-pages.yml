@@ -19,9 +19,10 @@ jobs:
           toolchain: stable
           override: true
           target: wasm32-unknown-unknown
+      - uses: cargo-bins/cargo-binstall@main
       - uses: Swatinem/rust-cache@v1
       - name: Install CLI
-        run: cargo install dioxus-cli --locked
+        run: cargo binstall dioxus-cli --locked
       - uses: actions/checkout@v2
       - name: Build
         run: dx build --release
