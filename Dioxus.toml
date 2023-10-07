@@ -18,6 +18,8 @@ asset_dir = "public"
 # HTML title tag content
 title = "Dioxus Community 🧬"
 
+base_path = "website"
+
 [web.watcher]
 
 # when watcher trigger, regenerate the `index.html`
