@@ -1,7 +1,7 @@
 use dioxus_router::prelude::*;
 
-use dioxus::prelude::*;
 use crate::Route;
+use dioxus::prelude::*;
 
 const NAVBAR_LINK_STYLE: &str = "p-1 px-4 text-center flex items-center text-white hover:border-transparent hover:bg-blue-2 border-2 border-blue-2 rounded-full transition ease-in-out delay-30";
 
