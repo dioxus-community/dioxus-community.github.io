@@ -11,7 +11,7 @@ pub fn Home(cx: Scope) -> Element {
                 img {
                     class: "mx-auto my-8",
                     width: "200",
-                    src: "./logo.svg"
+                    src: "logo.svg"
                 },
                 p {
                     class: "text-white w-2/3 text-center mx-auto",
