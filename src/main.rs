@@ -27,8 +27,8 @@ fn app(cx: Scope) -> Element {
 
 #[derive(Clone, Routable, Debug, PartialEq)]
 pub enum Route {
-    #[route("/")]
+    #[route("/website")]
     Home {},
-    #[route("/made-with-dioxus")]
-    MadeWithDioxus { },
+    // #[route("/made-with-dioxus")]
+    // MadeWithDioxus { },
 }
