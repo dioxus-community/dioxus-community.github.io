@@ -10,12 +10,6 @@ mod routes;
 
 pub use routes::*;
 
-#[cfg(not(debug_assertions))]
-pub const BASE_PATH: &str = "/website";
-
-#[cfg(debug_assertions)]
-pub const BASE_PATH: &str = "";
-
 fn main() {
     // Init debug
     dioxus_logger::init(LevelFilter::Info).expect("failed to init logger");
@@ -33,10 +27,6 @@ fn app(cx: Scope) -> Element {
 
 #[derive(Clone, Routable, Debug, PartialEq)]
 pub enum Route {
-    #[cfg(not(debug_assertions))]
-    #[route("/website")]
-    Home {},
-    #[cfg(debug_assertions)]
     #[route("/")]
     Home {},
     // #[route("/made-with-dioxus")]
