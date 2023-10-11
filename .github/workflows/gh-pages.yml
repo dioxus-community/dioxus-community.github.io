@@ -34,7 +34,7 @@ jobs:
 
       - name: Add .nojekyll and fallback 404
         run: |
-          touch .nojekyll
+          touch dist/.nojekyll
           cp dist/index.html dist/404.html
 
       - name: Deploy 🚀
