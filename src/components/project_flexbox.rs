@@ -6,7 +6,7 @@ use crate::components::ProjectCard;
 #[inline_props]
 pub fn ProjectFlexbox<'a>(cx: Scope, projects: &'a [Project<'a>]) -> Element {
     render! {
-        div { class: "flex flex-wrap flex-row gap-4",
+        div { class: "flex flex-wrap gap-4 [&_*]:grow",
             for project in projects {
                 ProjectCard { key: "{project.name}", project: project }
             }
