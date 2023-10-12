@@ -25,10 +25,21 @@ jobs:
           target: wasm32-unknown-unknown
       - uses: cargo-bins/cargo-binstall@main
       - uses: Swatinem/rust-cache@v1
+
+      - name: Setup Node
+        uses: actions/setup-node@v3.8.1
+        with:
+          cache: 'npm'
+
+      - name: NPM install
+        run: npm install -D tailwindcss
+
       - name: Install CLI
         run: cargo binstall --no-confirm dioxus-cli --locked --force
+
       - name: Build
         run: dx build --release
+
       - name: Deploy 🚀
         uses: JamesIves/github-pages-deploy-action@v4.2.3
         with:
