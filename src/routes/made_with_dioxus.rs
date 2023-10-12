@@ -26,7 +26,7 @@ pub fn MadeWithDioxus(cx: Scope) -> Element {
                 }
                 " file and send us a pull request!"
             }
-            div { class: "pl-48 pr-48", ProjectGrid { projects: &MADE_WITH_DIOXUS } }
+            div { class: "mx-auto lg:w-1/2", ProjectGrid { projects: &MADE_WITH_DIOXUS } }
         }
     }
 }

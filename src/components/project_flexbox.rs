@@ -6,7 +6,7 @@ use crate::components::ProjectCard;
 #[inline_props]
 pub fn ProjectGrid<'a>(cx: Scope, projects: &'a [Project<'a>]) -> Element {
     render! {
-        div { class: "grid grid-cols-2 gap-4",
+        div { class: "grid grid-cols-1 lg:grid-cols-2 gap-4",
             for project in projects {
                 ProjectCard { key: "{project.name}", project: project }
             }
