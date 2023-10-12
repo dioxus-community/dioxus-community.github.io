@@ -1,7 +1,7 @@
 use dioxus::prelude::*;
 use dioxus_router::prelude::*;
 use crate::components::ProjectGrid;
-use crate::projects::PROJECTS;
+use crate::MADE_WITH_DIOXUS;
 
 #[allow(non_snake_case)]
 #[inline_props]
@@ -22,11 +22,11 @@ pub fn MadeWithDioxus(cx: Scope) -> Element {
                 Link {
                     class: "underline",
                     to: "https://github.com/dioxus-community/dioxus-community.github.io/blob/main/src/projects.rs",
-                    "src/projects.rs"
+                    "src/made_by_dioxus"
                 }
                 " file and send us a pull request!"
             }
-            ProjectGrid { projects: &PROJECTS }
+            div { class: "pl-24 pr-24", ProjectGrid { projects: &MADE_WITH_DIOXUS } }
         }
     }
 }

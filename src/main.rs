@@ -3,11 +3,14 @@ use dioxus_router::prelude::*;
 use log::LevelFilter;
 
 mod components;
+mod made_with_dioxus;
 mod models;
-mod projects;
+mod our_projects;
 mod routes;
 
 use components::*;
+use made_with_dioxus::*;
+use our_projects::*;
 use routes::*;
 
 const GITHUB_API_BASE_URL: &str = "https://api.github.com";
