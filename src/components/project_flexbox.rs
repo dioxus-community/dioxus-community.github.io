@@ -4,9 +4,9 @@ use crate::components::ProjectCard;
 
 #[allow(non_snake_case)]
 #[inline_props]
-pub fn ProjectFlexbox<'a>(cx: Scope, projects: &'a [Project<'a>]) -> Element {
+pub fn ProjectGrid<'a>(cx: Scope, projects: &'a [Project<'a>]) -> Element {
     render! {
-        div { class: "flex flex-wrap gap-4 [&_*]:grow",
+        div { class: "grid grid-cols-2 gap-4",
             for project in projects {
                 ProjectCard { key: "{project.name}", project: project }
             }

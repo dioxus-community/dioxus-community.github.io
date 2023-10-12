@@ -4,7 +4,7 @@ use dioxus_router::prelude::*;
 use crate::{GITHUB_API_BASE_URL, ORGANIZATION_NAME, PROJECT_MARKER_FILE_NAME};
 use crate::models::Project;
 use serde::{Serialize, Deserialize};
-use crate::components::{ProjectCard, ProjectFlexbox};
+use crate::components::{ProjectCard, ProjectGrid};
 
 #[allow(non_snake_case)]
 #[inline_props]
@@ -22,7 +22,7 @@ pub fn OurProjects(cx: Scope) -> Element {
             }
             // TODO: Cache the value
             match fetched_projects.value() {
-                Some(Ok(projects)) => rsx! { ProjectFlexbox { projects: projects } },
+                Some(Ok(projects)) => rsx! { ProjectGrid { projects: projects } },
                 Some(Err(e)) => rsx! { "🤔 An error occurred while fetching projects: {e}" },
                 None => rsx! { "Loading..." },
             }

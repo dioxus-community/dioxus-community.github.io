@@ -1,6 +1,6 @@
 use dioxus::prelude::*;
 use dioxus_router::prelude::*;
-use crate::components::ProjectFlexbox;
+use crate::components::ProjectGrid;
 use crate::projects::PROJECTS;
 
 #[allow(non_snake_case)]
@@ -26,7 +26,7 @@ pub fn MadeWithDioxus(cx: Scope) -> Element {
                 }
                 " file and send us a pull request!"
             }
-            ProjectFlexbox { projects: &PROJECTS }
+            ProjectGrid { projects: &PROJECTS }
         }
     }
 }
