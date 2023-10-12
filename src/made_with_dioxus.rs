@@ -18,7 +18,7 @@ macro_rules! made_with_dioxus {
     };
 }
 
-pub const MADE_WITH_DIOXUS: &'static [Project<'static>] = &[
+pub const MADE_WITH_DIOXUS: &[Project<'static>] = &[
     made_with_dioxus! {
         name: "Uplink",
         description: "Secure, encrypted, P2P chat app",
