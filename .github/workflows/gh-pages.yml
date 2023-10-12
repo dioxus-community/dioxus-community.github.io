@@ -25,10 +25,18 @@ jobs:
           target: wasm32-unknown-unknown
       - uses: cargo-bins/cargo-binstall@main
       - uses: Swatinem/rust-cache@v1
+
       - name: Install CLI
         run: cargo binstall --no-confirm dioxus-cli --locked --force
+
       - name: Build
         run: dx build --release
+
+      - name: Add .nojekyll and fallback 404
+        run: |
+          touch dist/.nojekyll
+          cp dist/index.html dist/404.html
+
       - name: Deploy 🚀
         uses: JamesIves/github-pages-deploy-action@v4.2.3
         with:
