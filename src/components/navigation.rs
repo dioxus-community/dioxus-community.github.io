@@ -8,7 +8,7 @@ const NAVBAR_LINK_STYLE: &str = "p-1 px-4 text-center flex items-center text-whi
 #[inline_props]
 pub fn Navigation(cx: Scope) -> Element {
     render! {
-        nav { class: "mx-auto p-2 flex justify-stretch bg-blue-1 rounded-md gap-2",
+        nav { class: "mx-auto p-2 flex flex-wrap justify-stretch bg-blue-1 rounded-md gap-2",
             Link { class: NAVBAR_LINK_STYLE, to: Route::Home {}, "Home" }
             Link { class: NAVBAR_LINK_STYLE, to: "https://github.com/dioxus-community", "GitHub" }
             Link { class: NAVBAR_LINK_STYLE, to: Route::OurProjects {}, "Our projects" }
