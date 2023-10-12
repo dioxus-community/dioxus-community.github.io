@@ -10,7 +10,7 @@ pub fn OurProjects(cx: Scope) -> Element {
             p { class: "w-2/3 text-center mx-auto pb-4",
                 "A list of all projects that gather under the name of Dioxus Community!"
             }
-            div { class: "mx-auto lg:w-1/2", ProjectGrid { projects: &OUR_PROJECTS } }
+            div { class: "mx-auto lg:w-9/12", ProjectGrid { projects: &OUR_PROJECTS } }
         }
     }
 }
