@@ -11,8 +11,8 @@ pub fn Navigation(cx: Scope) -> Element {
         nav { class: "mx-auto p-2 flex justify-stretch bg-blue-1 rounded-md gap-2",
             Link { class: NAVBAR_LINK_STYLE, to: Route::Home {}, "Home" }
             Link { class: NAVBAR_LINK_STYLE, to: "https://github.com/dioxus-community", "GitHub" }
-            Link { class: NAVBAR_LINK_STYLE, to: Route::MadeWithDioxus {}, "Made with Dioxus" }
             Link { class: NAVBAR_LINK_STYLE, to: Route::OurProjects {}, "Our projects" }
+            Link { class: NAVBAR_LINK_STYLE, to: Route::MadeWithDioxus {}, "Made with Dioxus" }
         }
     }
 }
