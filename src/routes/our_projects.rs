@@ -16,7 +16,7 @@ pub fn OurProjects(cx: Scope) -> Element {
                 Link { class: "underline", to: "https://discord.com/channels/899851952891002890/1155572382157783141", "link" }
                 "."
             }
-            div { class: "mx-auto lg:w-9/12", ProjectGrid { projects: &OUR_PROJECTS } }
+            div { class: "mx-auto lg:w-9/12", ProjectGrid { projects: &OUR_PROJECTS, insert_stars: true } }
         }
     }
 }

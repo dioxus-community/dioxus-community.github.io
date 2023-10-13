@@ -11,6 +11,7 @@ use components::*;
 use our_projects::*;
 use routes::*;
 
+const GITHUB_API_BASE_URL: &str = "https://api.github.com";
 /// The organization name *on GitHub*.
 pub const ORGANIZATION_NAME: &str = "dioxus-community";
 pub const PROJECT_MARKER_FILE_NAME: &str = "Cargo.toml";
