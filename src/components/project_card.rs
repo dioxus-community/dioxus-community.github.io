@@ -126,8 +126,8 @@ async fn fetch_star_count(repository_url: String) -> Result<usize, String> {
     let response = response.as_bytes();
     let mut star_count: usize = 0;
 
-    for i in stargazers_prop_index + STARGAZERS_PROPERTY_PATTERN.len()..response.len() {
-        let c = response[i] as char;
+    for byte in response.iter().skip(stargazers_prop_index + STARGAZERS_PROPERTY_PATTERN.len()) {
+        let c = *byte as char;
 
         if c == ',' {
             break;
@@ -139,7 +139,11 @@ async fn fetch_star_count(repository_url: String) -> Result<usize, String> {
         }
 
         if c.is_numeric() {
-            star_count = (star_count * 10) + (c.to_digit(10).unwrap() as usize);
+            let Some(c_digit) = c.to_digit(10) else {
+                return Err(format!("couldn't convert char {c:?} to a digit using a radix of 10"));
+            };
+
+            star_count = (star_count * 10) + (c_digit as usize);
         }
     }
 
