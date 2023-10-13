@@ -10,9 +10,19 @@ const NAVBAR_LINK_STYLE: &str = "p-1 px-4 justify-center grow flex text-white ho
 pub fn Navigation(cx: Scope) -> Element {
     render! {
         nav { class: "mx-auto p-2 flex flex-wrap bg-blue-1 rounded-md md:rounded-full gap-2",
-            Link { active_class: NAVBAR_LINK_ACTIVE_STYLE, class: NAVBAR_LINK_STYLE, to: Route::Home {}, "Home" }
+            Link {
+                active_class: NAVBAR_LINK_ACTIVE_STYLE,
+                class: NAVBAR_LINK_STYLE,
+                to: Route::Home {},
+                "Home"
+            }
             Link { class: NAVBAR_LINK_STYLE, to: "https://github.com/dioxus-community", "GitHub" }
-            Link { active_class: NAVBAR_LINK_ACTIVE_STYLE, class: NAVBAR_LINK_STYLE, to: Route::OurProjects {}, "Our projects" }
+            Link {
+                active_class: NAVBAR_LINK_ACTIVE_STYLE,
+                class: NAVBAR_LINK_STYLE,
+                to: Route::OurProjects {},
+                "Our projects"
+            }
         }
     }
 }

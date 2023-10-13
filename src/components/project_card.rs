@@ -75,53 +75,52 @@ fn Stars<'a>(cx: Scope, project: &'a Project<'a>, insert_stars: bool) -> Element
         return None;
     };
 
-    let fetched_stars = use_state(cx, || Option::None::<usize>);
-
-    use_effect(cx, &repository_url.to_string(), |url| {
-        to_owned![fetched_stars];
-
-        async move {
-            fetched_stars.set(fetch_star_count(&url).await);
-        }
+    let fetched_stars = use_future(cx, &repository_url.to_string(), |url| {
+        fetch_star_count(url)
     });
 
-    match fetched_stars.get() {
-        Some(star_count) => render! {
+    match fetched_stars.value() {
+        Some(Ok(star_count)) => render! {
             tr {
                 th { "⭐ Stars" }
                 td { "{star_count}" }
             }
         },
+        Some(Err(e)) => {
+            log::error!("couldn't fetch stars from repository \"{repository_url}\". Error: {e}");
+
+            None
+        },
         None => None,
     }
 }
 
-async fn fetch_star_count(repository_url: &str) -> Option<usize> {
+async fn fetch_star_count(repository_url: String) -> Result<usize, String> {
     // Skip initial https://
     let mut segments = repository_url.split('/').skip(2);
 
     if segments.next() != Some("github.com") {
-        return None;
+        return Err(String::from("repository URL is not from GitHub"));
     }
 
     let Some(owner) = segments.next() else {
-        return None;
+        return Err(format!("couldn't get repository owner from the repository URL segments. Segments: {segments:?}"));
     };
     let Some(repo) = segments.next() else {
-        return None;
+        return Err(format!("couldn't get repository name from the repository URL segments. Segments: {segments:?}"));
     };
 
     let get_url = format!("{GITHUB_API_BASE_URL}/repos/{owner}/{repo}");
 
-    let Ok(response) = reqwest::get(get_url).await else {
-        return None;
+    let Ok(response) = reqwest::get(&get_url).await else {
+        return Err(format!("reqwest: Couldn't send request to {get_url:?}"));
     };
     let Ok(response) = response.text().await else {
-        return None;
+        return Err(format!("reqwest: Couldn't parse response as text. Response URL: {get_url:?}"));
     };
 
     let Some(stargazers_prop_index) = response.find(STARGAZERS_PROPERTY_PATTERN) else {
-        return None;
+        return Err(format!("couldn't find the pattern \"{STARGAZERS_PROPERTY_PATTERN}\" in response text. Response text: {response:?}"));
     };
 
     let response = response.as_bytes();
@@ -144,5 +143,5 @@ async fn fetch_star_count(repository_url: &str) -> Option<usize> {
         }
     }
 
-    Some(star_count)
+    Ok(star_count)
 }
