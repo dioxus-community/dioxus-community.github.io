@@ -12,7 +12,6 @@ pub fn Navigation(cx: Scope) -> Element {
             Link { class: NAVBAR_LINK_STYLE, to: Route::Home {}, "Home" }
             Link { class: NAVBAR_LINK_STYLE, to: "https://github.com/dioxus-community", "GitHub" }
             Link { class: NAVBAR_LINK_STYLE, to: Route::OurProjects {}, "Our projects" }
-            Link { class: NAVBAR_LINK_STYLE, to: Route::MadeWithDioxus {}, "Made with Dioxus" }
         }
     }
 }

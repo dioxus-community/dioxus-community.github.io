@@ -1,6 +1,7 @@
 use std::fmt::{Display, Formatter};
 
 #[derive(Clone, PartialEq, Debug)]
+#[allow(dead_code)]
 pub enum ProjectCategory {
     App,
     Miscellaneous,

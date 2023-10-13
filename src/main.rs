@@ -3,17 +3,14 @@ use dioxus_router::prelude::*;
 use log::LevelFilter;
 
 mod components;
-mod made_with_dioxus;
 mod models;
 mod our_projects;
 mod routes;
 
 use components::*;
-use made_with_dioxus::*;
 use our_projects::*;
 use routes::*;
 
-const GITHUB_API_BASE_URL: &str = "https://api.github.com";
 /// The organization name *on GitHub*.
 pub const ORGANIZATION_NAME: &str = "dioxus-community";
 pub const PROJECT_MARKER_FILE_NAME: &str = "Cargo.toml";
@@ -38,8 +35,8 @@ pub enum Route {
     #[layout(Layout)]
         #[route("/")]
         Home {},
-        #[route("/made-with-dioxus")]
-        MadeWithDioxus {},
         #[route("/our-projects")]
         OurProjects {},
+        #[route("/:..segments")]
+        NotFound { segments: Vec<String> },
 }

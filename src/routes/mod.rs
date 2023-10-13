@@ -1,3 +1,3 @@
 dry_mods::mods! {
-    mod pub use home, made_with_dioxus, our_projects;
+    mod pub use home, our_projects, not_found;
 }
