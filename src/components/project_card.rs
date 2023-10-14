@@ -21,6 +21,10 @@ pub fn ProjectCard<'a>(cx: Scope, project: &'a Project<'a>, insert_stars: bool) 
                     th { "👀 Name" }
                     td { "{project.name}" }
                 }
+                tr {
+                    th { "🛠️ Status" }
+                    td { "{project.status}" }
+                }
                 if let Some(description) = &project.description {
                     rsx! {
                         tr {
@@ -133,7 +137,7 @@ async fn fetch_star_count(repository_url: String) -> Result<usize, String> {
             break;
         }
 
-        // Skip whitespace after "<PROP>":<WHITESPACE><VALUE>
+        // Skip whitespace after "<PROP>":<WHITESPACE?><VALUE>
         if c.is_whitespace() {
             continue;
         }

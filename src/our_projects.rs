@@ -1,5 +1,6 @@
 use crate::models::Project;
 use crate::models::ProjectCategory;
+use crate::models::ProjectStatus;
 
 macro_rules! our_project {
     (
@@ -8,6 +9,7 @@ macro_rules! our_project {
         repository_name: $repository_name:literal,
         website: $website:literal,
         category: $category:expr,
+        status: $status:expr,
     ) => {
         Project {
             name: ::std::borrow::Cow::Borrowed($name),
@@ -19,6 +21,7 @@ macro_rules! our_project {
             website: Some(::std::borrow::Cow::Borrowed($website)),
             star_count: None,
             category: $category,
+            status: $status:,
         }
     };
 
@@ -27,6 +30,7 @@ macro_rules! our_project {
         description: $description:literal,
         repository_name: $repository_name:literal,
         category: $category:expr,
+        status: $status:expr,
     ) => {
         Project {
             name: ::std::borrow::Cow::Borrowed($name),
@@ -38,6 +42,7 @@ macro_rules! our_project {
             website: None,
             star_count: None,
             category: $category,
+            status: $status,
         }
     };
 }
@@ -48,17 +53,20 @@ pub const OUR_PROJECTS: &[Project<'static>] = &[
         description: "State management for Dioxus 🧬",
         repository_name: "dioxus-redux",
         category: ProjectCategory::Utility,
+        status: ProjectStatus::Experimental,
     },
     our_project! {
         name: "Dioxus resize observer",
         description: "Resize observer hooks for Dioxus 🧬",
         repository_name: "dioxus-resize-observer",
         category: ProjectCategory::Utility,
+        status: ProjectStatus::Experimental,
     },
     our_project! {
         name: "Dioxus Animations",
         description: "Animations ⏯️ library for Dioxus 🧬 ",
         repository_name: "dioxus-animations",
         category: ProjectCategory::Utility,
+        status: ProjectStatus::Experimental,
     },
 ];
