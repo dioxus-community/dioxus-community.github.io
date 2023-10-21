@@ -1,13 +1,13 @@
+use crate::{models::Project, GITHUB_API_BASE_URL};
 use dioxus::prelude::*;
 use dioxus_router::prelude::*;
-use crate::{models::Project, GITHUB_API_BASE_URL};
 
 const STARGAZERS_PROPERTY_PATTERN: &str = "\"stargazers_count\":";
 
 /// Creates a card with all the properties of the given project.
-/// 
+///
 /// # Arguments
-/// 
+///
 /// - `project` - The project to display.
 /// - `insert_stars` - Will insert GitHub stars if the project has a `None` `star_count` property and a `Some(_)` `repository_url` property.
 /// If the repository URL is not a GitHub repository, this will fail.
@@ -71,17 +71,22 @@ fn Stars<'a>(cx: Scope, project: &'a Project<'a>, insert_stars: bool) -> Element
         };
     }
 
+    let empty_star_row = rsx! {
+        tr {
+            th { "⭐ Stars" }
+            td { "N/A" }
+        }
+    };
+
     if !insert_stars {
-        return None;
+        return cx.render(empty_star_row);
     };
 
     let Some(repository_url) = &project.repository_url else {
-        return None;
+        return cx.render(empty_star_row);
     };
 
-    let fetched_stars = use_future(cx, &repository_url.to_string(), |url| {
-        fetch_star_count(url)
-    });
+    let fetched_stars = use_future(cx, &repository_url.to_string(), fetch_star_count);
 
     match fetched_stars.value() {
         Some(Ok(star_count)) => render! {
@@ -94,8 +99,8 @@ fn Stars<'a>(cx: Scope, project: &'a Project<'a>, insert_stars: bool) -> Element
             log::error!("couldn't fetch stars from repository \"{repository_url}\". Error: {e}");
 
             None
-        },
-        None => None,
+        }
+        None => cx.render(empty_star_row),
     }
 }
 
@@ -111,7 +116,9 @@ async fn fetch_star_count(repository_url: String) -> Result<usize, String> {
         return Err(format!("couldn't get repository owner from the repository URL segments. Segments: {segments:?}"));
     };
     let Some(repo) = segments.next() else {
-        return Err(format!("couldn't get repository name from the repository URL segments. Segments: {segments:?}"));
+        return Err(format!(
+            "couldn't get repository name from the repository URL segments. Segments: {segments:?}"
+        ));
     };
 
     let get_url = format!("{GITHUB_API_BASE_URL}/repos/{owner}/{repo}");
@@ -120,7 +127,9 @@ async fn fetch_star_count(repository_url: String) -> Result<usize, String> {
         return Err(format!("reqwest: Couldn't send request to {get_url:?}"));
     };
     let Ok(response) = response.text().await else {
-        return Err(format!("reqwest: Couldn't parse response as text. Response URL: {get_url:?}"));
+        return Err(format!(
+            "reqwest: Couldn't parse response as text. Response URL: {get_url:?}"
+        ));
     };
 
     let Some(stargazers_prop_index) = response.find(STARGAZERS_PROPERTY_PATTERN) else {
@@ -130,7 +139,10 @@ async fn fetch_star_count(repository_url: String) -> Result<usize, String> {
     let response = response.as_bytes();
     let mut star_count: usize = 0;
 
-    for byte in response.iter().skip(stargazers_prop_index + STARGAZERS_PROPERTY_PATTERN.len()) {
+    for byte in response
+        .iter()
+        .skip(stargazers_prop_index + STARGAZERS_PROPERTY_PATTERN.len())
+    {
         let c = *byte as char;
 
         if c == ',' {
@@ -144,7 +156,9 @@ async fn fetch_star_count(repository_url: String) -> Result<usize, String> {
 
         if c.is_numeric() {
             let Some(c_digit) = c.to_digit(10) else {
-                return Err(format!("couldn't convert char {c:?} to a digit using a radix of 10"));
+                return Err(format!(
+                    "couldn't convert char {c:?} to a digit using a radix of 10"
+                ));
             };
 
             star_count = (star_count * 10) + (c_digit as usize);
