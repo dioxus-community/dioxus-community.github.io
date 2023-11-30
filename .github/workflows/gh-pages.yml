@@ -28,8 +28,6 @@ jobs:
 
       - name: Setup Node
         uses: actions/setup-node@v3.8.1
-        with:
-          cache: 'npm'
 
       - name: NPM install
         run: npm install -D tailwindcss
