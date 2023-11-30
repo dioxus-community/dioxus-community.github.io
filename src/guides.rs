@@ -1,6 +1,6 @@
 use crate::models::{Guide, ProjectCategory};
 
-macro_rules! guide {
+macro_rules! book_guide {
     (
         title: $title:expr,
         name: $name:expr,
@@ -12,7 +12,7 @@ macro_rules! guide {
             name: $name,
             description: $description,
             website: concat!(
-                "https://dioxus-community.githhub.io/guides/",
+                "https://dioxus-community.github.io/guides/books/",
                 $name,
                 "/index.html"
             ),
@@ -21,9 +21,9 @@ macro_rules! guide {
     };
 }
 
-pub const GUIDES: [Guide; 1] = [guide! {
+pub const GUIDES: [Guide; 1] = [book_guide! {
     title: "Learning Rust by making a website",
     name: "learning-rust-by-making-a-website",
-    description: "",
+    description: "Description",
     category: ProjectCategory::App,
 }];
