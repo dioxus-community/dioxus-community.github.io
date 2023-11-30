@@ -9,9 +9,9 @@ mod our_projects;
 mod routes;
 
 use components::*;
+use guides::GUIDES;
 use our_projects::OUR_PROJECTS;
 use routes::*;
-use guides::GUIDES;
 
 const GITHUB_API_BASE_URL: &str = "https://api.github.com";
 /// The organization name *on GitHub*.

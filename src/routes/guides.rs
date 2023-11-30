@@ -1,7 +1,7 @@
 use dioxus::prelude::*;
 use dioxus_router::prelude::*;
 use crate::GUIDES;
-use crate::components::{GuideGrid, ProjectGrid};
+use crate::components::{GuideGrid};
 
 #[allow(non_snake_case)]
 #[inline_props]

@@ -1,4 +1,4 @@
-use crate::{models::Project, GITHUB_API_BASE_URL};
+
 use dioxus::prelude::*;
 use dioxus_router::prelude::*;
 use crate::models::Guide;
