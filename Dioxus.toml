@@ -16,7 +16,7 @@ asset_dir = "public"
 [web.app]
 
 # HTML title tag content
-title = "Dioxus Community 🧬"
+title = "🧬 Dioxus Community"
 
 [web.watcher]
 
@@ -32,7 +32,6 @@ index_on_404 = true
 [web.resource]
 
 # CSS style file
-
 style = ["tailwind.css"]
 
 # Javascript code file
