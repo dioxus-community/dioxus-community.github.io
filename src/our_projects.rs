@@ -50,23 +50,30 @@ macro_rules! our_project {
 pub const OUR_PROJECTS: &[Project<'static>] = &[
     our_project! {
         name: "Dioxus Redux",
-        description: "State management for Dioxus 🧬",
+        description: "State management",
         repository_name: "dioxus-redux",
         category: ProjectCategory::Utility,
         status: ProjectStatus::Experimental,
     },
     our_project! {
         name: "Dioxus resize observer",
-        description: "Resize observer hooks for Dioxus 🧬",
+        description: "Resize observer hooks",
         repository_name: "dioxus-resize-observer",
         category: ProjectCategory::Utility,
         status: ProjectStatus::Experimental,
     },
     our_project! {
         name: "Dioxus Animations",
-        description: "Animations ⏯️ library for Dioxus 🧬 ",
+        description: "Animations library ⏯️",
         repository_name: "dioxus-animations",
         category: ProjectCategory::Utility,
         status: ProjectStatus::Experimental,
+    },
+    our_project! {
+        name: "Dioxus Charts",
+        description: "A simple chart components library 📈",
+        repository_name: "dioxus-charts",
+        category: ProjectCategory::Components,
+        status: ProjectStatus::Beta,
     },
 ];

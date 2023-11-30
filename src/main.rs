@@ -30,7 +30,7 @@ fn App(cx: Scope) -> Element {
     render! { Router::<Route> {} }
 }
 
-#[derive(Clone, Routable, Debug, PartialEq)]
+#[derive(Clone, Routable)]
 #[rustfmt::skip]
 pub enum Route {
     #[layout(Layout)]

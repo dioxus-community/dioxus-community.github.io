@@ -4,6 +4,7 @@ use std::fmt::{Formatter, Display};
 #[allow(dead_code)]
 pub enum ProjectStatus {
     Stable,
+    Beta,
     Experimental,
 }
 
@@ -11,6 +12,7 @@ impl ProjectStatus {
     fn to_static_string(&self) -> &'static str {
         match self {
             Self::Stable => "Stable ✔️",
+            Self::Beta => "Beta 🔬",
             Self::Experimental => "Experimental ⚠️",
         }
     }
