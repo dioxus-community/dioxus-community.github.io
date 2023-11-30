@@ -5,8 +5,8 @@
 
 set -x -e
 
-book_dir="./books"
-book_out_dir="./dist/guides"
+book_dir="./guides/books"
+book_out_dir="./dist/guides/books"
 
 echo "Creating necessary directories"
 mkdir -p "$book_out_dir"
