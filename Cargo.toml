@@ -1,4 +1,4 @@
- [package]
+[package]
 name = "dioxus-community"
 version = "0.1.0"
 authors = ["marc2332"]
