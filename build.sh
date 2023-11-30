@@ -9,7 +9,7 @@ book_dir="./books"
 book_out_dir="./dist/guides"
 
 echo "Creating necessary directories"
-mkdir -p dist/books
+mkdir -p dist/guides
 
 echo "Building Dioxus"
 dx build --release
