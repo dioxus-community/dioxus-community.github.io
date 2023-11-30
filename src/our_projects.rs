@@ -47,7 +47,7 @@ macro_rules! our_project {
     };
 }
 
-pub const OUR_PROJECTS: &[Project<'static>] = &[
+pub const OUR_PROJECTS: [Project<'static>; 4] = [
     our_project! {
         name: "Dioxus Redux",
         description: "State management",

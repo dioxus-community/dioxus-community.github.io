@@ -1,28 +1,38 @@
+use std::marker::PhantomData;
 use dioxus::prelude::*;
 use dioxus_router::prelude::*;
 use crate::Route;
 
-const NAVBAR_LINK_ACTIVE_STYLE: &str = "bg-blue-2";
-const NAVBAR_LINK_STYLE: &str = "p-1 px-4 justify-center grow flex text-white hover:border-transparent hover:bg-blue-2 border-2 border-blue-2 rounded-md md:rounded-full transition ease-in-out delay-30";
+#[derive(Props)]
+struct NavigationLinkProps<'a> {
+    pub label: &'a str,
+    /// Same as the corresponding [`LinkProps`](https://docs.rs/dioxus-router/latest/dioxus_router/components/struct.LinkProps.html) property.
+    #[props(into)]
+    pub to: IntoRoutable,
+}
 
 #[allow(non_snake_case)]
-#[inline_props]
+fn NavigationLink<'a>(cx: Scope<'a, NavigationLinkProps<'static>>) -> Element<'a> {
+    let NavigationLinkProps { to, label } = cx.props;
+
+    render! {
+        Link {
+            active_class: "bg-blue-2",
+            class: "p-1 px-4 justify-center grow flex text-white hover:border-transparent hover:bg-blue-2 border-2 border-blue-2 rounded-md md:rounded-full transition ease-in-out delay-30",
+            to: to.clone(),
+            "{label}"
+        }
+    }
+}
+
+#[allow(non_snake_case)]
 pub fn Navigation(cx: Scope) -> Element {
     render! {
         nav { class: "mx-auto p-2 flex flex-wrap bg-blue-1 rounded-md md:rounded-full gap-2",
-            Link {
-                active_class: NAVBAR_LINK_ACTIVE_STYLE,
-                class: NAVBAR_LINK_STYLE,
-                to: Route::Home {},
-                "Home"
-            }
-            Link { class: NAVBAR_LINK_STYLE, to: "https://github.com/dioxus-community", "GitHub" }
-            Link {
-                active_class: NAVBAR_LINK_ACTIVE_STYLE,
-                class: NAVBAR_LINK_STYLE,
-                to: Route::OurProjects {},
-                "Our projects"
-            }
+            NavigationLink { to: Route::Home {}, label: "Home" }
+            NavigationLink { to: "https://github.com/dioxus-community", label: "GitHub" }
+            NavigationLink { to: Route::OurProjects {}, label: "Our projects" }
+            NavigationLink { to: Route::Guides {}, label: "Guides" }
         }
     }
 }

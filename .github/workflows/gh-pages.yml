@@ -32,16 +32,17 @@ jobs:
       - name: NPM install
         run: npm install -D tailwindcss
 
-      - name: Install CLI
+      - name: Install Dioxus CLI
         run: cargo binstall --no-confirm dioxus-cli --locked --force
 
-      - name: Build
-        run: dx build --release
+      - name: Install mdbook CLI
+        run: cargo binstall --no-confirm mdbook --locked --force
 
-      - name: Add .nojekyll and fallback 404
-        run: |
-          touch dist/.nojekyll
-          cp dist/index.html dist/404.html
+      - name: Make build script executable
+        run: chmod +x ./build.sh
+
+      - name: Run build script
+        run: ./build.sh
 
       - name: Deploy 🚀
         uses: JamesIves/github-pages-deploy-action@v4.2.3

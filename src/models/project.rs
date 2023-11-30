@@ -1,6 +1,5 @@
 use std::borrow::Cow;
 use crate::models::ProjectCategory;
-
 use super::ProjectStatus;
 
 #[derive(PartialEq, Clone, Debug)]
