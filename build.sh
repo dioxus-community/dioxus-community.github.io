@@ -5,8 +5,13 @@
 
 set -x -e
 
+out_dir="./dist"
 book_dir="./guides/books"
-book_out_dir="./dist/guides/books"
+book_out_dir="${out_dir}/guides/books"
+
+echo "Cleaning"
+cargo clean
+dx clean
 
 echo "Creating necessary directories"
 mkdir -p "$book_out_dir"
@@ -23,5 +28,5 @@ for book in "$book_dir"/*; do
 done
 
 echo "Adding .nojekyll and fallback 404"
-touch dist/.nojekyll
-cp dist/index.html dist/404.html
+touch "$out_dir"/.nojekyll
+cp "$out_dir"/index.html "$out_dir"/404.html

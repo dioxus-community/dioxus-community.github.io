@@ -12,7 +12,7 @@ macro_rules! book_guide {
             name: $name,
             description: $description,
             website: concat!(
-                "https://dioxus-community.github.io/guides/books/",
+                "guides/books/",
                 $name,
                 "/index.html"
             ),
