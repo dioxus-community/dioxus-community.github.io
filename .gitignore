@@ -4,3 +4,4 @@ dist/
 books/**/book
 .idea
 .vscode
+book/
