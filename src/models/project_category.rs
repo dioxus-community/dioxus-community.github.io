@@ -11,6 +11,7 @@ pub enum ProjectCategory {
     Logging,
     Renderer,
     Deployment,
+    Security,
 }
 
 impl ProjectCategory {
@@ -24,6 +25,7 @@ impl ProjectCategory {
             Self::Logging => "📡 Logging",
             Self::Renderer => "🎥 Renderer",
             Self::Deployment => "⚙️ Deployment",
+            Self::Security => "🔒 Security",
         }
     }
 }

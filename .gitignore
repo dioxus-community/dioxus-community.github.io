@@ -1,5 +1,6 @@
 target/
 **/*.rs.bk
 dist/
+books/**/book
 .idea
 .vscode

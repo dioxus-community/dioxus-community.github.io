@@ -116,9 +116,7 @@ async fn fetch_star_count(repository_url: String) -> Result<usize, String> {
         return Err(format!("couldn't get repository owner from the repository URL segments. Segments: {segments:?}"));
     };
     let Some(repo) = segments.next() else {
-        return Err(format!(
-            "couldn't get repository name from the repository URL segments. Segments: {segments:?}"
-        ));
+        return Err(format!("couldn't get repository name from the repository URL segments. Segments: {segments:?}"));
     };
 
     let get_url = format!("{GITHUB_API_BASE_URL}/repos/{owner}/{repo}");
@@ -127,9 +125,7 @@ async fn fetch_star_count(repository_url: String) -> Result<usize, String> {
         return Err(format!("reqwest: Couldn't send request to {get_url:?}"));
     };
     let Ok(response) = response.text().await else {
-        return Err(format!(
-            "reqwest: Couldn't parse response as text. Response URL: {get_url:?}"
-        ));
+        return Err(format!("reqwest: Couldn't parse response as text. Response URL: {get_url:?}"));
     };
 
     let Some(stargazers_prop_index) = response.find(STARGAZERS_PROPERTY_PATTERN) else {
@@ -156,9 +152,7 @@ async fn fetch_star_count(repository_url: String) -> Result<usize, String> {
 
         if c.is_numeric() {
             let Some(c_digit) = c.to_digit(10) else {
-                return Err(format!(
-                    "couldn't convert char {c:?} to a digit using a radix of 10"
-                ));
+                return Err(format!("couldn't convert char {c:?} to a digit using a radix of 10"));
             };
 
             star_count = (star_count * 10) + (c_digit as usize);

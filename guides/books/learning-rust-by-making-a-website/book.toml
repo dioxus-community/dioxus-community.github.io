@@ -1,0 +1,6 @@
+[book]
+authors = ["tigerros"]
+language = "en"
+multilingual = false
+src = "src"
+title = "Learning Rust by making a website"
