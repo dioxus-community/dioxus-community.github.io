@@ -3,14 +3,11 @@ use dioxus_router::prelude::*;
 use log::LevelFilter;
 
 mod components;
-mod guides;
 mod models;
 mod our_projects;
 mod routes;
 
 use components::*;
-use guides::GUIDES;
-use our_projects::OUR_PROJECTS;
 use routes::*;
 
 const GITHUB_API_BASE_URL: &str = "https://api.github.com";
@@ -38,10 +35,6 @@ pub enum Route {
     #[layout(Layout)]
         #[route("/")]
         Home {},
-        #[route("/our-projects")]
-        OurProjects {},
-        #[route("/guides")]
-        Guides { },
         #[route("/:..segments")]
         NotFound { segments: Vec<String> },
 }

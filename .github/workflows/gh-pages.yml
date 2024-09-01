@@ -33,10 +33,7 @@ jobs:
         run: npm install -D tailwindcss
 
       - name: Install Dioxus CLI
-        run: cargo install --no-confirm dioxus-cli --force
-
-      - name: Install mdbook CLI
-        run: cargo binstall --no-confirm mdbook --locked --force
+        run: cargo install dioxus-cli --force
 
       - name: Make build script executable
         run: chmod +x ./build.sh

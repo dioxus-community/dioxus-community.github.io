@@ -5,6 +5,7 @@ use std::fmt::{Display, Formatter};
 pub enum ProjectCategory {
     App,
     Miscellaneous,
+    State,
     Utility,
     Components,
     Styling,
@@ -19,6 +20,7 @@ impl ProjectCategory {
         match self {
             Self::App => "🚀 App",
             Self::Miscellaneous => "📎 Miscellaneous",
+            Self::State => "📻 State",
             Self::Utility => "🧰 Utility",
             Self::Components => "📦 Components",
             Self::Styling => "🎨 Styling",

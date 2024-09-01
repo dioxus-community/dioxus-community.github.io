@@ -15,35 +15,19 @@ const STARGAZERS_PROPERTY_PATTERN: &str = "\"stargazers_count\":";
 #[component]
 pub fn ProjectCard(project: &'static Project<'static>, insert_stars: bool) -> Element {
     rsx!(
-        div { class: "text-white p-4 bg-blue-1 rounded-md",
+        div { class: "text-white p-4 border-2 border-blue-1 rounded-lg drop-shadow-sm hover:bg-blue-1 duration-75",
             table { class: "text-left [&_th]:pr-4",
                 tr {
                     th { "👀 Name" }
                     td { "{project.name}" }
                 }
                 tr {
-                    th { "🛠️ Status" }
-                    td { "{project.status}" }
+                    th { "📜 Description" }
+                    td { "{project.description}" }
                 }
-                if let Some(description) = &project.description {
-                    tr {
-                        th { "📜 Description" }
-                        td { "{description}" }
-                    }
-                }
-                if let Some(repository_url) = &project.repository_url {
-                    tr {
-                        th { "💾 Repository" }
-                        td { Link { class: "underline", to: "{repository_url}", "{repository_url}" } }
-                    }
-                }
-                if let Some(website) = &project.website {
-                    if !website.is_empty() {
-                        tr {
-                            th { "🌐 Website" }
-                            td { Link { class: "underline", to: "{website}", "{website}" } }
-                        }
-                    }
+                tr {
+                    th { "💾 Repository" }
+                    td { Link { class: "underline", to: "{project.repository_url}", "{project.repository_name}" } }
                 }
                 Stars { project, insert_stars }
             }
@@ -74,11 +58,7 @@ fn Stars(project: &'static Project<'static>, insert_stars: bool) -> Element {
         return empty_star_row;
     };
 
-    let Some(repository_url) = &project.repository_url else {
-        return empty_star_row;
-    };
-
-    let fetched_stars = use_resource(use_reactive(&repository_url.to_string(), |repository_url| {
+    let fetched_stars = use_resource(use_reactive(&project.repository_url.to_string(), |repository_url| {
         fetch_star_count(repository_url)
     }));
 
@@ -92,7 +72,7 @@ fn Stars(project: &'static Project<'static>, insert_stars: bool) -> Element {
             }
         ),
         Some(Err(e)) => {
-            log::error!("couldn't fetch stars from repository \"{repository_url}\". Error: {e}");
+            log::error!("couldn't fetch stars from repository \"{}\". Error: {e}", project.repository_url);
 
             None
         }

@@ -29,8 +29,7 @@ pub fn Navigation() -> Element {
         nav { class: "mx-auto p-2 flex flex-wrap bg-blue-1 rounded-md md:rounded-full gap-2",
             NavigationLink { to: Route::Home {}, label: "Home" }
             NavigationLink { to: "https://github.com/dioxus-community", label: "GitHub" }
-            NavigationLink { to: Route::OurProjects {}, label: "Our projects" }
-            NavigationLink { to: Route::Guides {}, label: "Guides" }
+            NavigationLink { to: "https://discord.com/invite/XgGxMSkvUM", label: "Discord" }
         }
     )
 }
