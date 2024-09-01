@@ -15,21 +15,23 @@ const STARGAZERS_PROPERTY_PATTERN: &str = "\"stargazers_count\":";
 #[component]
 pub fn ProjectCard(project: &'static Project<'static>, insert_stars: bool) -> Element {
     rsx!(
-        div { class: "text-white p-4 border-2 border-blue-1 rounded-lg drop-shadow-sm hover:bg-blue-1 duration-75",
-            table { class: "text-left [&_th]:pr-4",
-                tr {
-                    th { "👀 Name" }
-                    td { "{project.name}" }
+        Link { to: "{project.repository_url}",
+            div { class: "text-white p-4 border-2 border-blue-1 rounded-lg drop-shadow-sm hover:bg-blue-1 duration-75",
+                table { class: "text-left [&_th]:pr-4",
+                    tr {
+                        th { "👀 Name" }
+                        td { "{project.name}" }
+                    }
+                    tr {
+                        th { "📜 Description" }
+                        td { "{project.description}" }
+                    }
+                    tr {
+                        th { "💾 Repository" }
+                        td { "{project.repository_name}" }
+                    }
+                    Stars { project, insert_stars }
                 }
-                tr {
-                    th { "📜 Description" }
-                    td { "{project.description}" }
-                }
-                tr {
-                    th { "💾 Repository" }
-                    td { Link { class: "underline", to: "{project.repository_url}", "{project.repository_name}" } }
-                }
-                Stars { project, insert_stars }
             }
         }
     )

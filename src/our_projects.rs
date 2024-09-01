@@ -35,7 +35,10 @@ macro_rules! our_project {
                 "https://github.com/dioxus-community/",
                 $repository_name
             )),
-            repository_name: ::std::borrow::Cow::Borrowed($repository_name),
+            repository_name: ::std::borrow::Cow::Borrowed(concat!(
+                "dioxus-community/",
+                $repository_name
+            )),
             star_count: None,
             category: $category,
         }
