@@ -1,9 +1,9 @@
 use dioxus::prelude::*;
 
 #[allow(non_snake_case)]
-#[inline_props]
-pub fn Home(cx: Scope) -> Element {
-    render! {
+#[component]
+pub fn Home() -> Element {
+    rsx!(
         div { class: "flex justify-center items-center ",
             div {
                 img { class: "mx-auto my-8", width: "200", src: "logo.svg" }
@@ -13,5 +13,5 @@ pub fn Home(cx: Scope) -> Element {
                 }
             }
         }
-    }
+    )
 }

@@ -24,12 +24,12 @@ fn main() {
     console_error_panic_hook::set_once();
 
     log::info!("starting app");
-    dioxus_web::launch(App);
+    launch(App);
 }
 
 #[allow(non_snake_case)]
-fn App(cx: Scope) -> Element {
-    render! { Router::<Route> {} }
+fn App() -> Element {
+    rsx!(Router::<Route> {})
 }
 
 #[derive(Clone, Routable)]

@@ -4,9 +4,9 @@ use crate::OUR_PROJECTS;
 use crate::components::ProjectGrid;
 
 #[allow(non_snake_case)]
-#[inline_props]
-pub fn OurProjects(cx: Scope) -> Element {
-    render! {
+#[component]
+pub fn OurProjects() -> Element {
+    rsx!(
         div { class: "text-white",
             p { class: "w-2/3 text-center mx-auto pb-4",
                 "A list of all our projects. If you want to add your project to our organization, let us know at the Dioxus "
@@ -20,7 +20,7 @@ pub fn OurProjects(cx: Scope) -> Element {
                 }
                 "."
             }
-            div { class: "mx-auto lg:w-9/12", ProjectGrid { projects: &OUR_PROJECTS, insert_stars: true } }
+            div { class: "mx-auto lg:w-9/12", ProjectGrid { projects: OUR_PROJECTS, insert_stars: true } }
         }
-    }
+    )
 }

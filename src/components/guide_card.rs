@@ -4,9 +4,9 @@ use dioxus_router::prelude::*;
 use crate::models::Guide;
 
 #[allow(non_snake_case)]
-#[inline_props]
-pub fn GuideCard<'a>(cx: Scope, guide: &'a Guide) -> Element {
-    render! {
+#[component]
+pub fn GuideCard(guide: &'static Guide) -> Element {
+    rsx!(
         div { class: "text-white p-4 bg-blue-1 rounded-md",
             table { class: "text-left [&_th]:pr-4",
                 tr {
@@ -25,5 +25,5 @@ pub fn GuideCard<'a>(cx: Scope, guide: &'a Guide) -> Element {
                 }
             }
         }
-    }
+    )
 }

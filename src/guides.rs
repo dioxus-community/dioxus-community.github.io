@@ -11,17 +11,13 @@ macro_rules! book_guide {
             title: $title,
             name: $name,
             description: $description,
-            website: concat!(
-                "guides/books/",
-                $name,
-                "/index.html"
-            ),
+            website: concat!("guides/books/", $name, "/index.html"),
             category: $category,
         }
     };
 }
 
-pub const GUIDES: [Guide; 1] = [book_guide! {
+pub const GUIDES: &[Guide] = &[book_guide! {
     title: "Learning Rust by making a website",
     name: "learning-rust-by-making-a-website",
     description: "Description",

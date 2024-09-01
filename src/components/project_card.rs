@@ -12,9 +12,9 @@ const STARGAZERS_PROPERTY_PATTERN: &str = "\"stargazers_count\":";
 /// - `insert_stars` - Will insert GitHub stars if the project has a `None` `star_count` property and a `Some(_)` `repository_url` property.
 /// If the repository URL is not a GitHub repository, this will fail.
 #[allow(non_snake_case)]
-#[inline_props]
-pub fn ProjectCard<'a>(cx: Scope, project: &'a Project<'a>, insert_stars: bool) -> Element {
-    render! {
+#[component]
+pub fn ProjectCard(project: &'static Project<'static>, insert_stars: bool) -> Element {
+    rsx!(
         div { class: "text-white p-4 bg-blue-1 rounded-md",
             table { class: "text-left [&_th]:pr-4",
                 tr {
@@ -26,49 +26,41 @@ pub fn ProjectCard<'a>(cx: Scope, project: &'a Project<'a>, insert_stars: bool) 
                     td { "{project.status}" }
                 }
                 if let Some(description) = &project.description {
-                    rsx! {
-                        tr {
-                            th { "📜 Description" }
-                            td { "{description}" }
-                        }
+                    tr {
+                        th { "📜 Description" }
+                        td { "{description}" }
                     }
                 }
                 if let Some(repository_url) = &project.repository_url {
-                    rsx! {
-                        tr {
-                            th { "💾 Repository" }
-                            td { Link { class: "underline", to: "{repository_url}", "{repository_url}" } }
-                        }
+                    tr {
+                        th { "💾 Repository" }
+                        td { Link { class: "underline", to: "{repository_url}", "{repository_url}" } }
                     }
                 }
                 if let Some(website) = &project.website {
                     if !website.is_empty() {
-                        rsx! {
-                            tr {
-                                th { "🌐 Website" }
-                                td { Link { class: "underline", to: "{website}", "{website}" } }
-                            }
+                        tr {
+                            th { "🌐 Website" }
+                            td { Link { class: "underline", to: "{website}", "{website}" } }
                         }
-                    } else {
-                        rsx! { "" }
                     }
                 }
-                Stars { project: project, insert_stars: *insert_stars }
+                Stars { project, insert_stars }
             }
         }
-    }
+    )
 }
 
 #[allow(non_snake_case)]
-#[inline_props]
-fn Stars<'a>(cx: Scope, project: &'a Project<'a>, insert_stars: bool) -> Element {
+#[component]
+fn Stars(project: &'static Project<'static>, insert_stars: bool) -> Element {
     if let Some(star_count) = project.star_count {
-        return render! {
+        return rsx!(
             tr {
                 th { "⭐ Stars" }
                 td { "{star_count}" }
             }
-        };
+        );
     }
 
     let empty_star_row = rsx! {
@@ -79,28 +71,32 @@ fn Stars<'a>(cx: Scope, project: &'a Project<'a>, insert_stars: bool) -> Element
     };
 
     if !insert_stars {
-        return cx.render(empty_star_row);
+        return empty_star_row;
     };
 
     let Some(repository_url) = &project.repository_url else {
-        return cx.render(empty_star_row);
+        return empty_star_row;
     };
 
-    let fetched_stars = use_future(cx, &repository_url.to_string(), fetch_star_count);
+    let fetched_stars = use_resource(use_reactive(&repository_url.to_string(), |repository_url| {
+        fetch_star_count(repository_url)
+    }));
 
-    match fetched_stars.value() {
-        Some(Ok(star_count)) => render! {
+    let fetched_stars = &*fetched_stars.read();
+
+    match fetched_stars {
+        Some(Ok(star_count)) => rsx!(
             tr {
                 th { "⭐ Stars" }
                 td { "{star_count}" }
             }
-        },
+        ),
         Some(Err(e)) => {
             log::error!("couldn't fetch stars from repository \"{repository_url}\". Error: {e}");
 
             None
         }
-        None => cx.render(empty_star_row),
+        None => empty_star_row
     }
 }
 
